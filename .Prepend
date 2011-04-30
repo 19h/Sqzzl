@@ -1,0 +1,8 @@
+<?php
+        if ( file_exists("lock") )
+                exit("The system has been locked.");
+                
+        /*
+         *      Init the kernel of user-->auth
+         */
+?>

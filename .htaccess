@@ -1,0 +1,20 @@
+#RedirectMatch 412 dat
+        AddType application/x-httpd-php .Index
+        AddType application/x-httpd-php .Application
+        AddType application/x-httpd-php .Kernel
+        AddType application/x-httpd-php .Prepend
+        AddType application/x-httpd-php .View
+#php_value auto_prepend_file ".Prepend"
+DirectoryIndex .Index
+RewriteEngine On
+        RewriteCond %{SCRIPT_FILENAME} !-d
+        #RewriteRule ^([^\.]+)$ .Index?$1 [NC,L]
+        #RewriteRule ^([^\.]+).([^\.]+).([^\.]+)$ .Index?$2 [NC,L]
+        #RewriteRule ^([^\.]+).([^\.]+)$ .$1 [NC,L]
+        #RewriteRule ^Index?c&([^\.]+)$ .Index?PopulateElevation&Execute&$1 [NC,L]
+        RewriteRule ^login$ .Index?login&$1 [NC,L]
+        RewriteRule ^verify$ .Application?verify&$1 [NC,L]
+        RewriteRule ^vemail$ .Application?vemail [NC,L]
+        RewriteRule ^check$ .Application?check [NC,L]
+        RewriteRule ^register$ .Index?register [NC,L]
+        RewriteRule ^registry$ .Application?verify&registry [NC,L]

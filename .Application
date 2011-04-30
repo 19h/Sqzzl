@@ -1,0 +1,148 @@
+<?php
+        /*
+         * The Sqazzle Backend. r02. Q2/2011.
+         *
+         * (c) The authors of Sqazzle. All rights reserved.
+         */
+        
+        $_base = unserialize(file_get_contents("udb"));
+        
+        if ( isset( $_GET[ "vemail" ] ) ) { //obsolete
+                $_GET[ "vemail" ] = urldecode($_GET[ "vemail" ]);
+                if ( preg_match( "^([a-zA-Z0-9]((\.|\-)?[a-zA-Z0-9])*)@([a-zA-Z]((\.|\-)?[a-zA-Z0-9])*)\.([a-zA-Z]{2,8})$^", $_GET["vemail"] ) ) {
+                        print "yeah";
+                } else {
+                        print "fail";
+                }
+                exit;
+        }
+        
+        if ( isset( $_GET["check"] ) ) {
+                // check user-base.
+                print ($_POST["name"]!="qq")?"0":"1";
+                exit;
+        }
+        
+        if ( isset( $_GET[ "verify" ] ) ) {
+                // Base: it's the procedure...
+                if ( !isset( $_GET[ 'registry' ] ) ) {
+                        print "Should be logged in..";
+                } else {
+                        print_r($_REQUEST);
+                }
+                exit;
+        }
+        
+        if ( isset( $_GET[ "msg" ] ) ) {
+                $latest = unserialize( file_get_contents( "sx" ) );
+                print $latest[ count( $latest ) - 1 ];
+                exit;
+        }
+        
+        if ( isset( $_GET[ "post" ] ) ) {
+                if ( $_POST[ "h" ] == hash( "sha256", $_POST[ "v" ] ) ) {
+                        $latest = unserialize( file_get_contents( "sx" ) );
+                        $latest[  ] = $_POST[ "v" ];
+                        file_put_contents( "sx", serialize( $latest ) );
+                } else {
+                }
+                exit;
+        }
+        
+        if ( isset($_GET["d"]) ) {
+                function format_javascript( $data, $options = false, $c_string = "#DD0000", $c_comment = "#FF8000", $c_keyword = "#007700", $c_default = "#0000BB", $c_html = "#0000BB", $flush_on_closing_brace = false ) {
+                        if ( is_array( $options ) ) {
+                                extract( $options, EXTR_OVERWRITE );
+                        } else {
+                                $advanced_optimizations = $options;
+                        }
+                        
+                        @ini_set( 'highlight.string', $c_string );
+                        
+                        @ini_set( 'highlight.comment', $c_comment );
+                        @ini_set( 'highlight.keyword', $c_keyword );
+                        @ini_set( 'highlight.default', $c_default );
+                        @ini_set( 'highlight.html', $c_html );
+                        
+                        if ( $advanced_optimizations ) {
+                                $data = preg_replace( '/([$a-zA-z09]+) = \((.+)\) \? ([^]*)([ ]+)?\:([ ]+)?([^=\;]*)/', 'if ($2) {' . "\n" . ' $1 = $3; }' . "\n" . 'else {' . "\n" . ' $1 = $5; ' . "\n" . '}', $data );
+                        }
+                        
+                        
+                        $data = str_replace( array( ') { ', ' }', ";", "\r\n" ), array( ") {\n", "\n}", ";\n", "\n" ), $data );
+                        
+                        $data = preg_replace( "/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $data );
+                        $data = str_replace( "<?php", "<script>", highlight_string( "<?php \n" . $data . "\n?>", true ) );
+                        
+                        $data = explode( "\n", str_replace( array( "<br />" ), array( "\n" ), $data ) );
+                        
+                        
+                        $tab = 0;
+                        $output = '';
+                        
+                        foreach ( $data as $line ) {
+                                $lineecho = $line;
+                                if ( substr_count( $line, "\t" ) != $tab ) {
+                                        $lineecho = str_replace( "\t", "", trim( $lineecho ) );
+                                        $lineecho = str_repeat( "\t", $tab ) . $lineecho;
+                                }
+                                $tab = $tab + substr_count( $line, "{" ) - substr_count( $line, "}" );
+                                if ( $flush_on_closing_brace && trim( $line ) == "}" ) {
+                                        $output .= '}';
+                                } else {
+                                        $output .= str_replace( array( "{}", "[]" ), array( "<span style='color:" . $c_string . "!important;'>{}</span>", "<span style='color:" . $c_string . " !important;'>[]</span>" ), $lineecho . "\n" );
+                                }
+                        }
+                        
+                        
+                        $output = str_replace( array( '?php', '?&gt;' ), array( 'script type="text/javascript">', '&lt;/script&gt;' ), $output );
+                        
+                        return '<pre id="code_highlighted">' . $output . "</pre>";
+                }
+                print format_javascript(file_get_contents(".Kernel.js"));
+                exit;
+        }
+        
+        if ( isset( $_COOKIE['l'] ) ) {
+                if ( $_COOKIE['l'] == hash('sha256', (round(time() / 1000)*1000) . hash('sha256', hash('sha256', hash('sha256', "KenanSulayman") . hash('sha256', "789901847889635571973595")))) ) {
+                     define( "logged_in", true );   
+                }
+        }
+        if ( isset( $_POST['l'] ) ) {
+                if ( $_POST['l'] == hash('sha256', hash('sha256', "KenanSulayman") . hash('sha256', "789901847889635571973595")) )
+                        setcookie( "l", hash('sha256', (round(time() / 1000)*1000) . hash('sha256', hash('sha256', hash('sha256', "KenanSulayman") . hash('sha256', "789901847889635571973595"))))) and print "auth";
+                else
+                        print "fail";
+                /*
+                        hash('sha256', (round(time() / 1000)*1000) . hash('sha256', hash('sha256', hash('sha256', "KenanSulayman") . hash('sha256', "789901847889635571973595"))))
+                */
+        } elseif ( isset( $_Request['f'] ) ) {
+                if ( $_POST['f'] == "i" ) { ?>                                                        <div id="Question">
+                                                                <? $k->c[count($k->c)-1]; ?>
+                                                        </div>
+                                                        <input type="text" style="width: 400px;" class="solute" id="bdsm" value="Status" onclick="javascript:if(this.value=='Status'){this.value='';}" onblur="javascript:if(this.value==''){this.value='Status';}"/><?}
+                if ( $_Request['f'] == "js" ) { header("Content-type: text/javascript"); ?>Config.Functions.firePost= function (x) {
+                        return Config.Functions.R (
+                                ".Application",
+                                {f: "post", "c": x},
+                                function () {
+                                        $('bdsm').value='';
+                                        return Config.Functions.R (
+                                                ".Application",
+                                                { f: "i" },
+                                                function (x) {
+                                                        $('start').update(x);
+                                                }
+                                        );
+                                }
+                        );
+                };
+                Effect.observe($('bdsm'), 'keydown', function (e) { if ( e.keyCode == 13) return Config.Functions.firePost($('bdsm').value); });<?}
+                
+                if ( $_Request['f'] == "p" ) {
+                        
+                }
+        } else {
+                print "fail";
+        }
+?>

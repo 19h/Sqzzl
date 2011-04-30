@@ -1,0 +1,7 @@
+<?php
+        if ( isset ( $_COOKIE["loggedin"] ) ) {
+                include("Home.View");
+        } else {
+                include("Register.Index");
+        }
+?>
