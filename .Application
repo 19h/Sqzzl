@@ -7,15 +7,6 @@
         
         $_base = unserialize(file_get_contents("udb"));
         
-        if ( isset( $_GET[ "vemail" ] ) ) { //obsolete
-                $_GET[ "vemail" ] = urldecode($_GET[ "vemail" ]);
-                if ( preg_match( "^([a-zA-Z0-9]((\.|\-)?[a-zA-Z0-9])*)@([a-zA-Z]((\.|\-)?[a-zA-Z0-9])*)\.([a-zA-Z]{2,8})$^", $_GET["vemail"] ) ) {
-                        print "yeah";
-                } else {
-                        print "fail";
-                }
-                exit;
-        }
         
         if ( isset( $_GET["check"] ) ) {
                 // check user-base.
