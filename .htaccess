@@ -18,3 +18,8 @@ RewriteEngine On
         RewriteRule ^check$ .Application?check [NC,L]
         RewriteRule ^register$ .Index?register [NC,L]
         RewriteRule ^registry$ .Application?verify&registry [NC,L]
+Alias / /Interfaces/Sqzzl
+<Directory /Interfaces/Sqzzl>
+Order allow,deny
+Allow from all
+</Directory>
