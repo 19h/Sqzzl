@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html lang="en"> 
+<head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+    <meta http-equiv="x-dns-prefetch-control" content="off"/> 
+    <title>Sign up | Sqazzle</title> 
+    <link rel="icon" href="http://assets.tumblr.com/images/favicon.gif?2" type="image/gif"/> 
+    <link rel="apple-touch-icon" href="http://assets.tumblr.com/images/apple_touch_icon.png"/> 
+    <link rel="stylesheet" type="text/css" href="http://assets.tumblr.com/stylesheets/compressed/register_login.css?515"/> 
+    <link rel="stylesheet" type="text/css" href="http://assets.tumblr.com/stylesheets/compressed/promo_reasons.css?515" /> 
+    <script type="text/javascript" src="http://assets.tumblr.com/javascript/prototype_and_effects.js?515"></script> 
+    <script type="text/javascript" src="includes/login.js"></script> 
+    </head> 
+<? if (!isset($_GET["login"]) OR isset($_GET["register"])) { ?><body class=" register small_layout no_js    webkit"
+        data-invalid-email="Please enter a valid email address."
+    data-invalid-password="Please choose a longer password."
+    data-invalid-url-starts-with-hyphen="URL cannot begin with a hyphen."
+    data-invalid-url-ends-with-hyphen="URL cannot end with a hyphen."
+    data-taken-url="This URL is already taken."
+    data-login-url="http://www.tumblr.com/login"
+    data-register-url="http://www.tumblr.com/register"
+    data-page-title-login="Log in | Sqazzle"
+    data-page-title-register="Sign up | Sqazzle"> <? } else { ?><body class=" login small_layout no_js de_DE   webkit"
+        data-invalid-email="Bitte gib eine g&uuml;ltige E-Mail-Adresse ein."
+    data-invalid-password="W&auml;hle bitte ein l&auml;ngeres Passwort."
+    data-invalid-url-starts-with-hyphen="URL darf nicht mit einem Bindestrich beginnen."
+    data-invalid-url-ends-with-hyphen="URL darf nicht mit einem Bindestrich enden."
+    data-taken-url="Diese URL wird bereits verwendet."
+    data-login-url="http://www.tumblr.com/login"
+    data-register-url="http://www.tumblr.com/register"
+    data-page-title-login="Einloggen | Sqazzle"
+    data-page-title-register="Registrieren | Sqazzle"> <? } ?>
+    
+    <div class="startpage" id="startpage"> 
+        <div class="wrap" id="wrap"> 
+            <div id="main"> 
+                <div id="header"> 
+                    <h1><img class="logo" src="images/LogoW.png" alt="Tumblr"/></h1> 
+                    <a href="http://www.tumblr.com/login" class="login" data-sign-up="Sign up" data-log-in="Log in">Log in</a> 
+                </div> 
+                
+                                <div class="slideshow" id="slideshow_container"> 
+                                        
+                    <div id="slideshow_track"> 
+                        <ul id="slideshow_list"> 
+                            <li><img src="images/MagniA.png" alt="Tumblr Dashboard" /></li> 
+                            <li><img src="images/MagniB.png" alt="!Tumblr Dashboard" /></li> 
+                            <!--<li><img src="images/MagniC.png" alt="!Tumblr Dashboard" /></li> -->
+                        </ul> 
+                    </div> 
+                </div> 
+                
+                                <div id="register_form_container"> 
+                    <form method="post" action="/registry" id="register_form" class="register" onsubmit="_h_prep(this); return true;"> 
+                        <input type="hidden" name="hk" id="hk" value="f055184fdf11b67d850b56ae727cc6932a60430a 1304033095 37d74de821fa5f571fc1b18b0600412a26713918"> 
+                        
+                                                    <input type="hidden" name="referer" value="homepage"/> 
+                                                
+                                                
+                                                    <input type="hidden" name="redirect_to" value="/dashboard"/> 
+                                                
+                                                
+                                                
+                        <div class="input_wrapper"> 
+                            <label for="user_email">Email address</label> 
+                            <input type="text" id="user_email" name="user[email]"
+                            data-validation-type="email" value="" /> 
+                        </div> 
+                        <div class="input_wrapper"> 
+                            <label for="user_password">Password</label> 
+                            <input type="password" id="user_password" name="user[password]"
+                            data-validation-type="password" value="" /> 
+                        </div> 
+                        <div class="input_wrapper"> 
+                            <label for="tumblelog_name">URL</label> 
+                            <input type="text" id="tumblelog_name" name="tumblelog[name]" autocomplete="off"
+                            data-ghostwriter=".tumblr.com" data-validation-type="url"
+                            value="" /> 
+                        </div> 
+                        <button type="submit"><span>Start posting!</span></button> 
+                    </form> 
+                </div> 
+                
+                                <div id="login_form_container"> 
+                                        
+                    <form method="post" action="/verify" id="login_form"> 
+                                                
+                                                
+                        <div class="input_wrapper"> 
+                            <label for="login_email">Email address</label> 
+                            <input type="text" name="email" id="login_email" value=""/> 
+                        </div> 
+                        <div class="input_wrapper"> 
+                            <label for="login_password">Password</label> 
+                            <input type="password" id="login_password" name="password" /> 
+                        </div> 
+                        <button type="submit"><span>Log in</span></button> 
+                        <!--<br class="clear" /><p class="forgot_password"><a href="/forgot_password">Forgot your password?</a></p> -->
+                    </form> 
+                </div> 
+            </div> 
+            
+                        
+        </div> 
+        
+        <div id="footer"> 
+            <div class="footer_links"> 
+                <!--<strong>&copy; J&auml;ger &amp; Kenan Sulayman, et al.</strong> -->
+                <img src="images/bottom.png" alt="Authors." style="bottom: 10px;"/>
+                <!--<a href="/about">About</a> -->
+                <!--                    <a href="http://staff.tumblr.com/">What's New</a> -->
+                <!--                <a href="/content_policy">Content Policy</a> -->
+                <!--<a href="/terms_of_service">Terms of Service</a> -->
+                <!--                <a href="/privacy_policy">Privacy Policy</a> -->
+                
+                            </div> 
+            <div class="emboss" id="toggle_reasons" style="display: none;"> 
+                <div class="lip"></div> 
+                <div class="shadow"></div> 
+                <div class="words"></div> 
+            </div> 
+        </div> 
+        
+    </div> 
+    
+        <div id="reasons"> 
+                <div id="reasons_header" class="reasons_header"> 
+                        <a href="#" class="home">Home</a> 
+                        <div id="reasons_form_container"></div> 
+                        <div class="lip"></div> 
+                        <div class="shadow"></div> 
+                </div> 
+                
+                <div class="words" id="easiest_way"> 
+                        <p>The easiest way to blog.</p> 
+                </div> 
+                
+                <div id="promo_reasons_wrapper"></div> 
+                
+                <div class="footer_links under_reasons" id="footer_under_reasons"></div> 
+        </div> 
+    
+        <script type="text/javascript">
+                var _h_mousepx = 0;
+                var _h_keystrokes = 0;
+                var _h_body = document.getElementsByTagName('body')[0];
+                _h_body.onmousemove = function(e){ _h_mousepx++; }
+                _h_body.onkeyup = function(e){ _h_keystrokes++; }
+                
+                function _h_prep(the_form) {
+                        var hk = $(the_form).select('#hk').first();
+                        var i;
+                        if ( (i = hk.value.indexOf(' | ')) > -1) hk.value = hk.value.substring(0, i);
+                        hk.value += ' | ' + _h_mousepx + ' ' + _h_keystrokes + ' ' + Math.floor(((17 * _h_mousepx) + (42 * _h_keystrokes) + 1337) / 19.921124);
+                }
+                
+                $('reasons').hide();
+                $$('body').first().removeClassName('small_layout');
+                
+                            $$('body').first().removeClassName('no_js');
+        </script> 
+</body> 
+</html>

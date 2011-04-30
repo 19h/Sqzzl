@@ -1,0 +1,119 @@
+<? if ( isset($_GET['plain']) ) { header ( "Content-type: image/png;" ); print file_get_contents("Intercept.png"); exit;} if ( isset($_GET['notice']) ) { header ( "Content-type: image/png;" ); print file_get_contents("bnotice.png"); exit;} ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+                <head profile="http://gmpg.org/xfn/11">
+                        <title>Front Page</title>
+                        
+                        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+                        <meta name="keywords" content="Kenan Sulayman, Kenan, Sulayman, International, Core, Development, Modules, Javascript, PHP, psychologie, physik" /> 
+                        <meta name="author" content="Kenan Sulayman" /> 
+                        <meta name="robots" content="all" /> 
+                        <meta name="description" content="Kenan Sulayman - the business-card." /> 
+                        <meta name="geo.placename" content="Berlin" /> 
+                        <meta name="geo.position" content="452.485269;13.380689" /> 
+                        <meta name="ICBM" content="52.485269, 13.380689" />
+                        <!--<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/> -->
+                        <meta name="apple-mobile-web-app-capable" content="yes" /> 
+                        <meta name="apple-mobile-web-app-status-bar-style" content="white" /> 
+                        <link rel="stylesheet" href="typo/typo.css" type="text/css" media="screen" />
+                        <!--<link rel="stylesheet" href="typo.css" type="text/css" media="screen" />-->
+                        <style type="text/css"> 
+                                html, body { margin:0; padding:0; -webkit-font-smoothing: antialiased; font-smooth: always; }
+                                /* import */
+                                
+                                html {
+                                        color: #ddd;
+                                        background-color: #C3E4ED;
+                                        padding: 0 44px;
+                                        overflow: hidden;
+                                }
+                                
+                                .m {
+                                        font-family: "Museo700", "Century Gothic", "Futura Medium", "Apple Gothic", Helvetica, Arial, sans-serif;
+                                }
+                                
+                                body {
+                                        /*font: 15px "DejaVu Sans", "Bitstream Vera Sans", "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;*/
+                                        /*font-family: georgia, tahoma, sans-serif;*/
+                                        line-height: 1.7;
+                                        letter-spacing: 0.06em;
+                                        color: #ddd;
+                                        background-color: #C3E4ED;
+                                        max-width: 58em;
+                                        margin: 44px auto;
+                                        padding: 0;
+                                        position: relative;
+                                }
+                                
+                                p { margin:10em 0; }
+                                .outer { position:fixed; top:0; left:0; width:100%; height:100%; }
+                                .middle { height:100%; display:table; margin:0 auto; }
+                                .inner { vertical-align:middle; display:table-cell; }
+                                #corn { font-size: 1.2em; }
+                                #Question {
+                                        font:29px/40px "Museo700", "Century Gothic", "Futura Medium", "Apple Gothic", Helvetica, Arial, sans-serif;
+                                        background-color: #EEF8FB;
+                                        padding: 0.75em 2em 0.75em 2em;
+                                        color: black;
+                                        -moz-border-radius: 5px;     /* FFo */
+                                        border-radius: 5px;          /* SCo */
+                                        -webkit-border-radius: 5px;  /* iOS */
+                                }
+                                
+                                .bar { background-color: #44a4f0; background-image: url(gbg.png); height: 30px; }
+                                .alt { background-color: #c0fd6b; background-image: url(gbg2.png); height: 30px; }
+                                
+                                @-webkit-keyframes blink {
+                                        0%     { opacity: 0 } 50% { opacity: 0 }
+                                        50.01% { opacity: 1 } 100% { opacity: 1 }
+                                }
+                                
+                                blink {
+                                        -webkit-animation: blink 1.6s infinite linear alternate;
+                                        -webkit-font-smoothing: antialiased;
+                                        font-smooth: always;
+                                }
+
+                        </style>
+                        <script type="text/javascript" src="includes/prototype.js"></script>
+                        <script type="text/javascript" src="includes/scriptaculous.js"></script>
+                        <script type="text/javascript" src=".Kernel"></script>
+                </head>
+                <body> 
+                        <div class="outer"> 
+                                <div class="middle"> 
+                                        <div class="inner">
+                                                <div id="start">
+                                                        <div id="Question"></div>
+                                                </div><?php if ($_GET['m']!="post") {?>
+                                                <big style='color: black; float: left; left: 10px; font:15px/40px "Museo700", "Century Gothic", "Futura Medium", "Apple Gothic", Helvetica, Arial, sans-serif;'><b>&Sigma;</b> histoire</big>
+                                                <big style='color: black; float: right; right: 10px; font:15px/40px "Museo700", "Century Gothic", "Futura Medium", "Apple Gothic", Helvetica, Arial, sans-serif;'>about <b>&Sigma;</b></big>
+                                                <? }if ($_GET['m']=="post") {?>
+                                                <big style='color: black; float: left; left: 10px; font:15px/40px "Museo700", "Century Gothic", "Futura Medium", "Apple Gothic", Helvetica, Arial, sans-serif;'><b>Write =)</b></big>
+                                                <? }?>
+                                        </div>
+                                </div> 
+                        </div>
+                        <script type="text/javascript">
+<?php if ($_GET['m']=="post") {?>
+                                $('Question').innerHTML = "Status einf&uuml;gen..";
+                                Event.observe( $('start'), 'keydown', function (e) {
+                                        if ( typeof e != "undefined" )
+                                                if ( e.keyCode == 13 ){
+                                                        Config.Functions.getAPI();
+                                                        $('start').innerHTML = '<div id="Question">Sent.</div>';
+                                                }
+                                });
+                                Event.observe( $('Question'), 'click', function (e) { $('start').innerHTML = '<div id="Question" contenteditable></div>'; setTimeout( function(){$('Question').focus();}, 100); bl(); } );
+                                function bl() {
+                                        Event.observe( $('Question'), 'blur', function (e) { if ( $('Question').innerHTML == '' ) return $('Question').innerHTML = 'Status einf&uuml;gen..'; } );
+                                        Event.observe( $('Question'), 'click', function (e) { $('start').innerHTML = '<div id="Question" contenteditable></div>'; setTimeout( function(){$('Question').focus();}, 100); bl(); } );
+                                }<? } if ($_GET['m']!="post"){?>
+                                        setInterval( function() {
+                                                Config.Functions.load();
+                                        },2000);
+                                                Config.Functions.load();
+                                <? } ?>
+                        </script>
+                <!--I don't want to have ads here :) </body>--></body> 
+        </html>
