@@ -112,13 +112,8 @@
                                         $this->__tokenize ( $w_data );
                                 } else {
                                         $nb = array (
-                                                array( // c <-- d
-                                                        $db,
-                                                        microtime(1)
-                                                ),
-                                                array( // c --> d
-                                                        
-                                                )
+                                                array( $db, microtime(1) ),
+                                                array( )
                                         );
                                 }
                         } else {
@@ -126,9 +121,19 @@
                         }
                 }
                 
-                private function __tokenize ( $array ) {
-                        // rebuild
-                        $k = array(); foreach( $array as $k => $z ) $k [] = array( $k, $z );
+                public function __tokenize ( $q ) {
+                        $s = 2; /*Split coefficient*/
+                        for ( $i=0,$z=count($q),$y=array();$i<=$z-1;++$i) {
+                                $o=strlen($q[$i]);
+                                if(($w=$o%$s)==0)(--$o);else($o-=$w); /* ($o-$w)/$s */
+                                for( $x=0;$x<=$o; $x+=$s ){ // hardcode for speed, += != speed :: ++x * k!
+                                        if ( !($x > $o) )
+                                                $y[$i][] = substr($q[$i], $x, $s);
+                                }
+                        }
+                        return $y;
                 }
         }
+        $x = new nCdb;
+        //print_r($x->__tokenize(array("itkadskaasdadsassasasasdasd","sadasddsadsdsadsadsdsa"))); // DEMO
 ?>
