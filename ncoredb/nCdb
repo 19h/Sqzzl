@@ -91,7 +91,7 @@
                                 return false;
                 }
                 
-                public function __create( $db, $w_data = false, $keys = array() ) {
+                public function __create( $db, $w_data = false, $keys = array(  ) ) {
                         if ( $db != "" || $db == null || $db == 0 )
                                 if ( $this->__exists( $db ) )
                                         return false;
@@ -106,39 +106,42 @@
                                 $t = true;
                         } elseif ( $w_data == false || $sk == true )
                                 $t = false;
-                        if ( file_exists($db) ?: mkdir( $db ) ) {
-                                $d = substr(__FILE__,0,strlen(__FILE__)-strlen(basename(__FILE__))); chdir( $db );
+                        if ( file_exists( $db ) ?  : mkdir( $db ) ) {
+                                $d = substr( __FILE__, 0, strlen( __FILE__ ) - strlen( basename( __FILE__ ) ) );
+                                chdir( $db );
                                 @file_put_contents( "_v", "<//1//>" );
-                                if( $t ) {
-                                        for ( $x=0,$z=count($y),$y=$this->__tokenize ( $w_data );$x<=$z+1;++$x ) {// Tier C ARR, head routes
-                                                mkdir(join("/",$y[$x]),0777,1);
-                                                //for ( $$x=0,$$z=count($y[$x]);$$x<=$$z;++$$x )
-                                                //        if ( file_exists($y[$x][$$x]) )
-                                                //                chdir ($y[$x][$$x]);
-                                                //        else
-                                                //                if ( @mkdir($y[$x][$$x]) )
-                                                //                        chdir($y[$x][$$x]);
-                                                //                else
-                                                //                        return false;
-                                        }
-                                        ((is_array($keys))?1:$keys=array()); @file_put_contents("__db",serialize($keys));
-                                        chdir($d);
+                                if ( $t ) {
+                                        for ( $x = 0, $z = count( $y ), $y = $this->__tokenize( $w_data ); $x <= $z + 1; ++$x )
+                                                // Tier C ARR, head routes
+                                                mkdir( join( "/", $y[ $x ] ), 0777, 1 );
+                                        //for ( $$x=0,$$z=count($y[$x]);$$x<=$$z;++$$x )
+                                        //        if ( file_exists($y[$x][$$x]) )
+                                        //                chdir ($y[$x][$$x]);
+                                        //        else
+                                        //                if ( @mkdir($y[$x][$$x]) )
+                                        //                        chdir($y[$x][$$x]);
+                                        //                else
+                                        //                        return false;( ( is_array( $keys ) ) ? 1 : $keys = array(  ) );
+                                        @file_put_contents( "__db", serialize( $keys ) );
+                                        chdir( $d );
                                 } else {
-                                        $nb = array(array($db,microtime(1)),array());
+                                        $nb = array( array( $db, microtime( 1 ) ), array(  ) );
                                 }
                         } else {
                                 return false;
                         }
                 }
                 
-                private function __tokenize ( $q, $s=2 ) {
-                        for ( $i=0,$z=count($q),$y=array();$i<=$z-1;++$i) {
-                                $o=strlen($q[$i]=str_replace(chr(32),"",$q[$i]));
-                                if(($w=$o%$s)==0)(--$o);else($o-=$w); /* ($o-$w)/$s */
-                                for( $x=0;$x<=$o; $x+=$s ){ // hardcode for speed, += != speed :: ++x * k! - TODO
-                                        if ( !($x > $o) )
-                                                $y[$i][] = substr($q[$i], $x, $s);
-                                }
+                private function __tokenize( $q, $s = 2 ) {
+                        for ( $i = 0, $z = count( $q ), $y = array(  ); $i <= $z - 1; ++$i ) {
+                                $o = strlen( $q[ $i ] = str_replace( chr( 32 ), "", $q[ $i ] ) );
+                                if ( ( $w = $o % $s ) == 0 )
+                                        ( --$o );
+                                else
+                                        ( $o -= $w ); /* ($o-$w)/$s */
+                                for ( $x = 0; $x <= $o; $x += $s ) // hardcode for speed, += != speed :: ++x * k! - TODO
+                                        if ( !( $x > $o ) )
+                                                $y[ $i ][  ] = substr( $q[ $i ], $x, $s );
                         }
                         return $y;
                 }
