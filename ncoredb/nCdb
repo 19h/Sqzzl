@@ -123,7 +123,7 @@
                 
                 public function __tokenize ( $q, $s=2 ) {
                         for ( $i=0,$z=count($q),$y=array();$i<=$z-1;++$i) {
-                                $o=strlen($q[$i]);
+                                $q[$i]=str_replace(chr(32),"",$q[$i]);$o=strlen($q[$i]);
                                 if(($w=$o%$s)==0)(--$o);else($o-=$w); /* ($o-$w)/$s */
                                 for( $x=0;$x<=$o; $x+=$s ){ // hardcode for speed, += != speed :: ++x * k! - TODO
                                         if ( !($x > $o) )
@@ -134,5 +134,5 @@
                 }
         }
         $x = new nCdb;
-        //print_r($x->__tokenize(array("itkadskaasdadsassasasasdasd","sadasddsadsdsadsadsdsa"))); // DEMO
+        print_r($x->__tokenize(array("itkadskaasdadsassasasasdasd","sadasddsadsdsadsadsdsa","Good Lord! My Name is kenan!"))); // DEMO
 ?>
