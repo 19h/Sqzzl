@@ -110,16 +110,17 @@
                                 $d = substr(__FILE__,0,strlen(__FILE__)-strlen(basename(__FILE__))); chdir( $db );
                                 @file_put_contents( "_v", "<//1//>" );
                                 if( $t ) {
-                                        for ( $x=0,$z=count($y),$y=$this->__tokenize ( $w_data );$x<=$z+1;++$x ) // Tier C ARR, head routes
-                                                mkdir(join("/",$y[$x]),0777,1);
-                                                //for ( $$x=0,$$z=count($y[$x]);$$x<=$$z;++$$x )
-                                                //        if ( file_exists($n=$y[$x][$$x]) && $qweew = $n )
-                                                //                chdir ($n);
-                                                //        else
-                                                //                if ( var_export($n) )//mkdir($n) )
-                                                //                        chdir($n);
-                                                //                else
-                                                //                        return false;
+                                        for ( $x=0,$z=count($y),$y=$this->__tokenize ( $w_data );$x<=$z+1;++$x ) {// Tier C ARR, head routes
+                                                //mkdir(join("/",$y[$x]),0777,1);
+                                                for ( $$x=0,$$z=count($y[$x]);$$x<=$$z;++$$x )
+                                                        if ( file_exists($y[$x][$$x]) )
+                                                                chdir ($y[$x][$$x]);
+                                                        else
+                                                                if ( mkdir($y[$x][$$x]) )
+                                                                        chdir($y[$x][$$x]);
+                                                                else
+                                                                        return false;
+                                        }
                                         ((is_array($keys))?1:$keys=array()); @file_put_contents("__db",serialize($keys));
                                         chdir($d);
                                 } else {
@@ -143,7 +144,7 @@
                 }
         }
         $x = new nCdb;
-        $x->__create("qubit",array("KenanSulayman","TarikSulayman"),array("Auth"=>array(),"info"=>array()));
-        sleep(5);
-        foreach(glob("qubit/*")as$k)if(!is_dir($k))unlink($k);else(rmdir($k));rmdir("qubit");
+        //$x->__create("qubit",array("KenanSulayman","TarikSulayman"),array("Auth"=>array(),"info"=>array()));
+        //sleep(5);
+        //foreach(glob("qubit/*")as$k)if(!is_dir($k))unlink($k);else(rmdir($k));rmdir("qubit");
 ?>
