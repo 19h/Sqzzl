@@ -121,8 +121,7 @@
                         }
                 }
                 
-                public function __tokenize ( $q ) {
-                        $s = 2; /*Split coefficient*/
+                public function __tokenize ( $q, $s=2 ) {
                         for ( $i=0,$z=count($q),$y=array();$i<=$z-1;++$i) {
                                 $o=strlen($q[$i]);
                                 if(($w=$o%$s)==0)(--$o);else($o-=$w); /* ($o-$w)/$s */
