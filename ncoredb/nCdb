@@ -149,7 +149,7 @@
                         }
                 }
                 
-                public function __update ( $db, $index, $keys ) { // TODO! Check for $d,i,k VALID!
+                public function __update ( $db, $index, $keys ) { // TODO! Check for $d,i,k VALID! Refer to handling.
                         if ( $this -> __exists ( $db )  )
                                 if ( @file_exists( $p = "$db/" . join( "/", $this->__tokenize($index) ) . "/__db" ) )
                                         if ( $q = unserialize( file_get_contents( $p ) ) ){ // $sure? wgaf!
