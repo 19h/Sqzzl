@@ -6,7 +6,7 @@
         
         // Control-instance. A wrapper has been implemented, so it should be used.
         defined( "Interfaced" ) or die( "Wrapper is not registered." );
-        defined( "wAuth" ) or die( "Wrapper is not used." );
+        defined( "wAuth" ) or die( "Wrapper is not registered." );
         $g = get_included_files(  );
         if ( !in_array( wAuth, $g ) )
                 exit( "Fault." );
@@ -50,8 +50,7 @@
                                         $i += 16;
                                 }
                                 return base64_encode( $enc_text );
-                        } else {
-                        }
+                        } else;
                 }
                 
                 public function decrypt( $enc_text, $iv_len = 16 ) {
@@ -91,13 +90,20 @@
                                 return false;
                 }
                 
-                public function __create( $db, $w_data = false, $keys = array(  ) ) {
+                public function __create( $db, $w_data = false, $keys = array(  ), $use_uns = true ) { //pecific narrowing
                         if ( $db != "" || $db == null || $db == 0 )
                                 if ( $this->__exists( $db ) )
                                         return false;
                                 else;
                         else
                                 return false;
+                        if ( !isset( $use_uns ) )
+                                $use_uns = true;
+                        else if ( !is_bool ( $use_uns ) )
+                                $use_uns = true;
+                        else if ( $use_uns == false )
+                                if ( count( $w_data) != $keys ) // kinda strict, but hgaf. Maybe on_fail enforce $use_uns = true? better !fail! on FuCK.
+                                        return false;
                         if ( $w_data != false ) {
                                 if ( !is_array( $w_data ) )
                                         return false;
@@ -109,11 +115,22 @@
                         if ( file_exists( $db ) ?  : mkdir( $db ) ) {
                                 $d = substr( __FILE__, 0, strlen( __FILE__ ) - strlen( basename( __FILE__ ) ) );
                                 chdir( $db );
-                                @file_put_contents( "_v", "<//1//>" );
+                                @file_put_contents( "_v", serialize( array( microtime(true) /*ctime*/, array() /*for the logs*/ ) ));
                                 if ( $t ) {
-                                        for ( $x = 0, $z = count( $y ), $y = $this->__tokenize( $w_data ); $x <= $z + 1; ++$x )
+                                        for ( $x = 0, $z = count( $y ), $y = $this->__tokenize( $w_data ); $x <= $z + 1; ++$x ){
                                                 // Tier C ARR, head routes
-                                                mkdir( join( "/", $y[ $x ] ), 0777, 1 );
+                                                if ( mkdir( join( "/", $y[ $x ] ), 0777, 1 ) )
+                                                        if ( $use_uns )
+                                                                if ( file_put_contents ( join( "/", $y[ $x ] ) . "/" . "__db", serialize( array_merge( $keys, array ( "ctime" => microtime(true), "atime" => microtime(true) ) ) ) ) )
+                                                                        continue;
+                                                                else
+                                                                        break; // wtf?
+                                                        else
+                                                                if ( file_put_contents ( join( "/", $y[ $x ] ) . "/" . "__db", serialize ( array_merge( $keys[ $x ], array ( "ctime" => microtime(true), "atime" => microtime(true) ) ) ) ) )
+                                                                        continue;
+                                                                else
+                                                                        break;
+                                        }
                                         //for ( $$x=0,$$z=count($y[$x]);$$x<=$$z;++$$x )
                                         //        if ( file_exists($y[$x][$$x]) )
                                         //                chdir ($y[$x][$$x]);
@@ -124,12 +141,22 @@
                                         //                        return false;( ( is_array( $keys ) ) ? 1 : $keys = array(  ) );
                                         @file_put_contents( "__db", serialize( $keys ) );
                                         chdir( $d );
-                                } else {
-                                        $nb = array( array( $db, microtime( 1 ) ), array(  ) );
+                                } else { // there're no indices, so what is about the $keys? If element is empty, $e = $keys.
+                                        chdir( $d );
                                 }
                         } else {
                                 return false;
                         }
+                }
+                
+                public function __update ( $db, $index, $keys ) { // TODO! Check for $d,i,k VALID!
+                        if ( $this -> __exists ( $db )  )
+                                if ( @file_exists( $p = "$db/" . join( "/", $this->__tokenize($index) ) . "/__db" ) )
+                                        if ( $q = unserialize( file_get_contents( $p ) ) ){ // $sure? wgaf!
+                                                $q = array_merge( $q, $keys ); file_put_contents( $p, serialize( $q ) );
+                                        } else    return false;
+                                else    return false;
+                        else    return false;
                 }
                 
                 private function __tokenize( $q, $s = 2 ) {
@@ -148,6 +175,6 @@
         }
         $x = new nCdb;
         $x->__create("qubit",array("KenanSulayman","TarikSulayman"),array("Auth"=>array(),"info"=>array()));
+        $x->__update("qubit","KenanSulayman",array("junk"=>"funk"));
         //sleep(5);
-        //foreach(glob("qubit/*")as$k)if(!is_dir($k))unlink($k);else(rmdir($k));rmdir("qubit");
-?>
+        //foreach(glob("qubit/*")as$k)if(!is_dir($k))unlink($k);els
