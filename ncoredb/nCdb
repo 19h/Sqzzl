@@ -151,7 +151,7 @@
                 
                 public function __update ( $db, $index, $keys ) { // TODO! Check for $d,i,k VALID! Refer to handling.
                         if ( $this -> __exists ( $db )  )
-                                if ( @file_exists( $p = "$db/" . join( "/", $this->__tokenize($index) ) . "/__db" ) )
+                                if ( @file_exists( $p = "$db/" . implode( "/", $this->__tokenize($index) ) . "/__db" ) )
                                         if ( $q = unserialize( file_get_contents( $p ) ) ){ // $sure? wgaf!
                                                 $q = array_merge( $q, $keys ); file_put_contents( $p, serialize( $q ) );
                                         } else    return false;
@@ -174,7 +174,8 @@
                 }
         }
         $x = new nCdb;
+        // TEST
         $x->__create("qubit",array("KenanSulayman","TarikSulayman"),array("Auth"=>array(),"info"=>array()));
-        $x->__update("qubit","KenanSulayman",array("junk"=>"funk"));
+        $x->__update("qubit","KenanSulayman",array("junk"=>"funk")); //FAILS?
         //sleep(5);
         //foreach(glob("qubit/*")as$k)if(!is_dir($k))unlink($k);els
