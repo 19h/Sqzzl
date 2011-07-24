@@ -39,7 +39,7 @@
                         $plain_text .= "\x13";
                         $n = strlen( $plain_text );
                         if ( $n % 16 ) {
-                                $plain_text .= str_repeat( "\0", 16 - ( $n % 16 ) );
+                                $plaixt .= str_repeat( "\0", 16 - ( $n % 16 ) );
                                 $i = 0;
                                 $enc_text = $this->get_rnd_iv( $iv_len );
                                 $iv = substr( $this->password ^ $enc_text, 0, 512 );
@@ -68,18 +68,20 @@
                         return stripslashes( preg_replace( '/\\x13\\x00*$/', '', $plain_text ) );
                 }
         }
+        //
+        //$xorCrypt = new xorCrypt(  );
+        //$xorCrypt->set_key( "Your Secret Key" );
+        //
+        //$text = "hello world!";
+        //$encrypted = $xorCrypt->encrypt( $text, 32 );
         
-        $xorCrypt = new xorCrypt(  );
-        $xorCrypt->set_key( "Your Secret Key" );
-        
-        $text = "hello world!";
-        $encrypted = $xorCrypt->encrypt( $text, 32 );
-        
-        echo $encrypted;
-        print "\r\n";
-        echo $xorCrypt->decrypt( $encrypted, 32 );
+        //echo $encrypted;
+        //print "\r\n";
+        //echo $xorCrypt->decrypt( $encrypted, 32 );
         
         final class nCdb {
+                private $cache = array();
+                
                 public function __exists( $db ) {
                         if ( file_exists( $db ) )
                                 if ( file_exists( $db . "/_v" ) )
@@ -149,14 +151,25 @@
                         }
                 }
                 
-                public function __update ( $db, $index, $keys ) { // TODO! Check for $d,i,k VALID! Refer to handling.
-                        if ( $this -> __exists ( $db )  )
-                                if ( @file_exists( $p = "$db/" . implode( "/", $this->__tokenize($index) ) . "/__db" ) )
+                public function __update ( $db, $index, $keys ) { // TODO! Check for $d,i,k VALID! Refer to handling!
+                        //print serialize(/*implode( "/", */$this->__tokenize($index)/* )*/);
+                        if ( $this -> __exists ( $db ) and $p = $this->__tokenize(array($index)) )
+                                if ( @file_exists( $p = "$db/" . implode ( "/", $p[0] ) . "/__db" ) )
                                         if ( $q = unserialize( file_get_contents( $p ) ) ){ // $sure? wgaf!
                                                 $q = array_merge( $q, $keys ); file_put_contents( $p, serialize( $q ) );
                                         } else    return false;
                                 else    return false;
                         else    return false;
+                }
+                
+                public function __read ( $db, $index, $keys = false ) { // $keys == false else output filtered.
+                        if ( $this->__exists ( $db ) );
+                }
+                
+                public function __ressource ( $db ) { // create a new ressource
+                        if ( !isset($this->cache[$q = sha1($db)]) )
+                                $this->cache [ sha1($db) ] = $db;
+                        else    return $this->cache[ $q ];
                 }
                 
                 private function __tokenize( $q, $s = 2 ) {
@@ -175,7 +188,8 @@
         }
         $x = new nCdb;
         // TEST
-        $x->__create("qubit",array("KenanSulayman","TarikSulayman"),array("Auth"=>array(),"info"=>array()));
-        $x->__update("qubit","KenanSulayman",array("junk"=>"funk")); //FAILS?
-        //sleep(5);
-        //foreach(glob("qubit/*")as$k)if(!is_dir($k))unlink($k);els
+
+        $xorCrypt = new xorCrypt(); $xorCrypt->set_key( mt_rand() . md5(mt_rand()) );$n=$xorCrypt->encrypt( mt_rand(), 32 ); $n = md5($n);
+        
+        print "Creating '$n': "; $x->__create($n,array("KenanSulayman","TarikSulayman"),array("Auth"=>array(),"info"=>array())); print "done.\r\n";
+        print "Modifying '$n': "; $x->__update($n,"KenanSulayman",array("junk"=>"funk")); print "done.";
