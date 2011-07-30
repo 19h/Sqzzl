@@ -162,11 +162,23 @@
                         else    return false;
                 }
                 
-                public function __read ( $db, $index, $keys = false ) { // $keys == false else output filtered.
-                        if ( $this->__exists ( $db ) );
+                public function __read ( $db, $index, $keys = false ) { // $keys == false else output filtered. // if $keys != array OR count($keys) < 2 return array where count < 2
+                        if ( $this -> __exists ( $db ) and $p = $this->__tokenize(array($index)) ) // check $db + build chkstr
+                                if ( @file_exists( $p = "$db/" . implode ( "/", $p[0] ) . "/__db" ) ) // check $index
+                                        {
+                                               // load
+                                               $q = unserialize(file_get_contents($p));
+                                               // get index as requested
+                                                        // non-array - 1 elem
+                                                        
+                                                        // array - >1 elem
+                                                //return
+                                        }
+                                else  return false;
+                        else    return false;
                 }
                 
-                public function __ressource ( $db ) { // create a new ressource
+                public function __ressource ( $db ) { // create a new ressource 
                         if ( !isset($this->cache[$q = sha1($db)]) )
                                 $this->cache [ sha1($db) ] = $db;
                         else    return $this->cache[ $q ];
